@@ -4,10 +4,11 @@
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <link rel="icon" type="image/x-icon" href="/WN-Supper-PWA/assets/icons/app.ico">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" media="(prefers-color-scheme: light)" content="white">
   <meta name="theme-color" media="(prefers-color-scheme: dark)" content="black">
-  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="manifest" href="/WN-Supper-PWA/manifest.webmanifest">
   <title>Document</title>
   <style>
     body {
@@ -15,12 +16,34 @@
       flex-direction: column;
       align-items: center;
     }
+    @media screen and (max-width: 768px) {
+      img {
+        width: 100%;
+      }
+    }
   </style>
+ 
 </head>
 
 <body>
-  <img src="https://sgimage.netmarble.com/images/netmarble/mherosgb/20230215/l9pc1676430321027.jpg" alt="">\
+  <img src="https://sgimage.netmarble.com/images/netmarble/mherosgb/20230215/l9pc1676430321027.jpg" alt="">
   <img src="https://sgimage.netmarble.com/images/netmarble/mherosgb/20230215/ccuh1676430332355.jpg" alt="">
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker
+        .register('/WN-Supper-PWA/sw.js')
+        .then(() => { console.log('Service Worker Registered'); }).catch(() => {
+          console.log(`opps, some thing went wrong`);
+        });
+    }
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent Chrome 67 and earlier from automatically showing the prompt
+      e.preventDefault();
+      // Stash the event so it can be triggered later.
+      // Update UI to notify the user they can add to home screen
+    });
+  </script>
 </body>
 
 </html>
